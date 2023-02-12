@@ -5,12 +5,12 @@ namespace App;
 class Article
 {
 
-    private ?string $title = null;
+    private string $title = "";
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -25,6 +25,6 @@ class Article
 
     public function getSlug(): string
     {
-        return "";
+        return str_replace(" ", "_", $this->getTitle());
     }
 }
