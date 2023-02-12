@@ -27,4 +27,23 @@ class ArticleTest extends TestCase
         $this->article->setTitle('An example article');
         $this->assertEquals('An_example_article', $this->article->getSlug());
     }
+
+    public function testSlugHasWhitespaceReplacedBySingleUnderscore()
+    {
+        $this->article->setTitle("An    example   \n   article");
+        $this->assertEquals("An_example_article", $this->article->getSlug());
+    }
+
+    public function testSlugDoesNotStartOrEndWithAnUnderscore()
+    {
+        $this->article->setTitle(" An example article ");
+        $this->assertEquals("An_example_article", $this->article->getSlug());
+    }
+
+    public function testSlugDoesNotHaveAnyNonWordCharacters()
+    {
+        $this->article->setTitle("Read! This! Now!");
+        $this->assertEquals("Read_This_Now", $this->article->getSlug());
+    }
+
 }

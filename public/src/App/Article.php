@@ -25,6 +25,9 @@ class Article
 
     public function getSlug(): string
     {
-        return str_replace(" ", "_", $this->getTitle());
+        $slug = trim($this->getTitle());
+        $slug = preg_replace("/\s+/", "_", $slug);
+        $slug = preg_replace("/\W+/", "", $slug);
+        return $slug;
     }
 }
